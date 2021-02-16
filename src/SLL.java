@@ -129,4 +129,32 @@ public class SLL {
        }
        return false;
     }
+
+    /**
+     * return index of element given
+     * @param element to find index of
+     * @return index the position of found element, -1 if not found
+     */
+    public int getIndex(Object element) {
+        int index = 0;
+        SLLNode node = head;
+
+        while(node !=null) {
+            if(node.getElement().equals(element)) {
+                return index;
+            }
+            index++;
+            node = node.getNext();
+        }
+        return -1;
+    }
+
+    /** 
+     * add node at given index
+     * @param element to insert
+     * @param index the index in the list to add the node
+     */
+    public void addAtIndex(Object element, int index) {
+
+    }
 }

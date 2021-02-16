@@ -152,9 +152,9 @@ public class SLL {
     /** 
      * add node at given index
      * @param element to insert
-     * @param index the index in the list to add the node
+     * @param index the position in the list to add the node
      */
     public void addAtIndex(Object element, int index) {
-
+        //come back later to do this
     }
 }

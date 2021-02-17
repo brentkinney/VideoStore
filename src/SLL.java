@@ -154,8 +154,7 @@ public class SLL {
      * @param element to insert
      * @param index the position in the list to add the node
      */
-    public void addAtIndex(Object element, int index) {
-        //come back later to do this        
+    public void addAtIndex(Object element, int index) {               
         SLLNode temp = new SLLNode(element, null);
         SLLNode current = head;
         if(index == 0) {

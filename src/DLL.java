@@ -161,4 +161,13 @@ public class DLL {
            tail.setPrev(node);
         }
     }
+
+    /*
+        methods still needed:
+        reverse(): void // reverse the Doubly LinkedList
+        Add a method in DList to search whether it contains an element x  
+        Add a method in DList to return the index i of element x  
+        Add a method in DList to add a node at index i  
+        Add a method in DList to remove the node at index i  
+    */
 }

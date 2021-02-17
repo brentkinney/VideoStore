@@ -53,7 +53,8 @@ public class SLL {
     public void add(SLLNode n) {
         n.setNext(null);
 
-        if(head == null) {
+        if(head == null) 
+        {
             head = n;
             return;
         }
@@ -71,7 +72,8 @@ public class SLL {
      * remove last element (tail) in the list
      */
     public void remove() {
-        if(head == null) {            
+        if(head == null) 
+        {            
             return;
         }
 
@@ -82,7 +84,8 @@ public class SLL {
 
         while(node.getNext() != null) {
             SLLNode temp = node.getNext();
-            if(temp.getNext() == null) {
+            if(temp.getNext() == null) 
+            {
                 node.setNext(null);
             }
             else {
@@ -113,16 +116,19 @@ public class SLL {
      * @return true if element found in list
      */
     public boolean search(Object element) {
-        if(head == null) {            
+        if(head == null) 
+        {            
             return false;
         }
-       if(head.getElement() == element) {
+       if(head.getElement() == element) 
+       {
            return true;
        }
 
        SLLNode ref = head;
        while(ref.getNext() != null) {
-           if(ref.getNext().getElement() == element) {
+           if(ref.getNext().getElement() == element) 
+           {
                return true;
            }
            ref = ref.getNext();
@@ -140,7 +146,8 @@ public class SLL {
         SLLNode node = head;
 
         while(node !=null) {
-            if(node.getElement().equals(element)) {
+            if(node.getElement().equals(element)) 
+            {
                 return index;
             }
             index++;

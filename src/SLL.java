@@ -155,6 +155,36 @@ public class SLL {
      * @param index the position in the list to add the node
      */
     public void addAtIndex(Object element, int index) {
-        //come back later to do this
+        //come back later to do this        
+        SLLNode temp = new SLLNode(element, null);
+        SLLNode current = head;
+        if(index == 0) {
+            temp.setNext(head);
+            this.head = temp;
+        }
+        else {
+            for(int i =1;i < index;i++) {
+                current = current.getNext();
+            }
+            temp.setNext(current.getNext());
+            current.setNext(temp);
+        }        
+    }
+
+    /**
+     * remove node at given index
+     * @param index the position in the list to remove node
+     */
+    public void removeAtIndex(int index) {
+        SLLNode current = head;
+        if(index ==0) {
+            head = head.getNext();
+        }
+        else {
+            for(int i =1;i < index;i++) {
+                current = current.getNext();
+            }
+            current.setNext(current.getNext().getNext());
+        }
     }
 }

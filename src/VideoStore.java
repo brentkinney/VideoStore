@@ -1,5 +1,8 @@
 public class VideoStore {
     public static void main(String[] args) throws Exception {
+        
+        instructions();
+
         if (args[0] =="SLL")
         {
             //run Single Link List methods
@@ -20,5 +23,21 @@ public class VideoStore {
         {
             System.out.println("Please specify which Data Stucture to use as Arg 1: You may use 'SLL', 'DLL', 'BST', or 'AVL'");
         }
+    }
+
+    public static void instructions() {
+ 
+    }
+
+    public static void getDDL() {
+
+    }
+
+    public static void getBST() {
+
+    }
+
+    public static void getAVL() {
+        
     }
 }

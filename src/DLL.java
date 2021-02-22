@@ -25,14 +25,18 @@ public class DLL {
     public void setHead(DLLNode node) {
         if(head == null)
 		{
-			head = tail = new DLLNode(node, null, null);
+			head = tail = node;
 		}
         else
         {
-            head.setPrev(node);
             node.setNext(head);
             node.setPrev(null);
+            head.setPrev(node);
             head = node;
+            //head.setPrev(node);
+            //node.setNext(head);
+            //node.setPrev(null);
+            //head = node;
         }
     }
 
@@ -51,7 +55,7 @@ public class DLL {
     public void setTail(DLLNode node) {
         if(head == null)
 		{
-			head = tail = new DLLNode(node, null, null);
+			head = tail = node;
 		}
 		else 
 		{
@@ -234,10 +238,10 @@ public class DLL {
         if(index == 0) {
             temp.setNext(head);
             head.setPrev(temp);
-            this.head = temp;
+            head = temp;
         }
         else {
-            for(int i =1;i < index;i++) {
+            for(int i =0;i < index;i++) {
                 current = current.getNext();
             }
             temp.setNext(current);
@@ -254,15 +258,15 @@ public class DLL {
     public void removeAtIndex(int index) {
         DLLNode current = head;
         if(index ==0) {
-            head = head.getNext();
+            head = current.getNext();
             head.setPrev(null);
         }
         else {
-            for(int i =1;i < index;i++) {
+            for(int i =1;current != null && i < index;i++) {
                 current = current.getNext();
             }
             current.setNext(current.getNext().getNext());
-            current.setPrev(current.getPrev().getPrev());
+            current.setPrev(current.getPrev());
         }
     }    
 }

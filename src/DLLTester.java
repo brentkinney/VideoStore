@@ -52,8 +52,8 @@ public class DLLTester {
 		System.out.println("Index of Element 0 is " + index);
 
 		// Add a method in DList to add a node at index i
-		DLLNode x = new DLLNode(4, null, null);
-		d.addAtIndex(x, 1);
+		//DLLNode x = new DLLNode(4, null, null);
+		d.addAtIndex(4, 1);
 		d.print();
 
 		// Add a method in DList to remove the node at index i

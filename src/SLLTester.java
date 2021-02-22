@@ -50,8 +50,8 @@ public class SLLTester {
 		System.out.println("Index of Element 0 is " + index);
 
 		// Add a method in SLL to add a node at index i
-		SLLNode d = new SLLNode(4, null);
-		s.addAtIndex(d, 1);
+		//SLLNode d = new SLLNode(4, null);
+		s.addAtIndex(4, 1);
 		s.print();
 
 		// Add a method in SLL to remove the node at index i

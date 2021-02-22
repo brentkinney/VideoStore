@@ -162,12 +162,109 @@ public class DLL {
         }
     }
 
-    /*
-        methods still needed:
-        reverse(): void // reverse the Doubly LinkedList
-        Add a method in DList to search whether it contains an element x  
-        Add a method in DList to return the index i of element x  
-        Add a method in DList to add a node at index i  
-        Add a method in DList to remove the node at index i  
-    */
+    /**
+     * method to reverse the order of the doubly linked list
+     */
+    public void reverse() {
+        DLLNode temp = head;
+        head = tail;
+        tail = temp;
+        DLLNode p = head;
+
+        while (p != null)
+        { 
+            temp = p.getNext();
+            p.setNext(p.getPrev());
+            p.setPrev(temp);
+            p = p.getNext();
+        }
+    }
+
+    /**
+     * check to see if list contains given element
+     * @param element to search for
+     * @return true if element found in list
+     */
+    public boolean search(Object element) {
+        if(head == null) 
+        {            
+            return false;
+        }
+       if(head.getElement() == element) 
+       {
+           return true;
+       }
+       DLLNode ref = head;
+       while(ref.getNext() != null) {
+           if(ref.getNext().getElement() == element) 
+           {
+               return true;
+           }
+           ref = ref.getNext();
+       }
+       return false;
+    }
+
+    /**
+     * get index of element given
+     * @param element to find index of
+     * @return index position of element or -1 if not found
+     */
+    public int getIndex(Object element) {
+        int index = 0;
+        DLLNode node = head;
+
+        while(node !=null) {
+            if(node.getElement().equals(element)) 
+            {
+                return index;
+            }
+            index++;
+            node = node.getNext();
+        }
+        return -1;
+    }
+
+    /**
+     * add node at given index
+     * @param element to insert
+     * @param index position in list to add node
+     */
+    public void addAtIndex(Object element, int index) {
+        DLLNode temp = new DLLNode(element, null, null);
+        DLLNode current = head;
+        if(index == 0) {
+            temp.setNext(head);
+            head.setPrev(temp);
+            this.head = temp;
+        }
+        else {
+            for(int i =1;i < index;i++) {
+                current = current.getNext();
+            }
+            temp.setNext(current);
+            temp.setPrev(current.getPrev());
+            current.getPrev().setNext(temp);
+            current.setPrev(temp);
+        }  
+    }
+
+    /**
+     * remove node at given index
+     * @param index the position in the list to remove node
+     */
+    public void removeAtIndex(int index) {
+        DLLNode current = head;
+        if(index ==0) {
+            head = head.getNext();
+            head.setPrev(null);
+        }
+        else {
+            for(int i =1;i < index;i++) {
+                current = current.getNext();
+            }
+            current.setNext(current.getNext().getNext());
+            current.setPrev(current.getPrev().getPrev());
+        }
+    }    
 }

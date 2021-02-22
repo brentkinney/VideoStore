@@ -40,8 +40,8 @@ public class SLLTester {
 		s.print();
 
 		// Add a method in SLL to search whether it contains an element x
-		s.search(1);
-		s.search(0);
+		System.out.println(s.search(1));
+		System.out.println(s.search(0));
 
 		// Add a method in SLL to return the index i of element x
 		var index = s.getIndex(1);

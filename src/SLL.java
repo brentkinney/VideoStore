@@ -28,22 +28,18 @@ public class SLL {
      * print out all elements in the list
      * @return output string
      */
-    public String print() {
-        String out ="The SLList contains:\n";
-		SLLNode ref = head;
-		if(ref == null)
-			return out + "0 nodes.";
-		else
-			out += "head ->\t";
-		
-		while(ref.getNext() != null)
-		{
-			out += ref.getElement() + "\t->\t";
-			ref = ref.getNext();
-		}
-		
-		out += ref.getElement() +"\t->null"; //Add the last node.
-		return out;
+    public void print() {
+        SLLNode current = head;
+        String out = "";
+        if(current == null)
+        {
+            out = "List has 0 nodes";
+        }
+        while(current != null) {
+            out += current.getElement().toString() + "  ";
+            current = current.getNext();
+        }
+        System.out.println(out);
     }
 
     /**

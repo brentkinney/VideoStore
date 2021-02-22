@@ -66,21 +66,19 @@ public class DLL {
      * print nodes in the list
      * @return output string
      */
-    public String print() {
-        String out = "The DLList contains: \n";
-		DLLNode ref = head;
+    public void print() {
+        String out = "";
+		DLLNode current = head;
 		if(head == null)
-			return out + "0 nodes.";
-		else
-			out += "head -->\t";
-		
-		while(ref != tail) 
+        {
+            out += "List has 0 nodes.";
+        }		
+		while(current != null) 
 		{
-			out += ref.getElement() + "\t<-->\t";
-			ref = ref.getNext();
+			out += current.getElement().toString() + "  ";
+            current = current.getNext();
 		}
-		out += ref.getElement() + "\t<-- tail";
-		return out;
+		System.out.println(out);
     }
 
     /**

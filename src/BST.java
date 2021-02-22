@@ -1,3 +1,5 @@
+import javax.lang.model.util.ElementScanner6;
+
 public class BST {
     public BSTNode root;
 
@@ -9,22 +11,27 @@ public class BST {
     }
 
     /**
-     * add element to the tree
-     * @param obj is the element to add
+     * get root of tree
+     * @return root node
      */
-    public void add(Object obj) {
-        BSTNode node = new BSTNode(obj);
-        if(root == null) 
-        {
-            root = node;
+    public BSTNode getRoot() {
+        return root;
+    }
+
+    private BSTNode addRecursive(BSTNode current, Object element) {
+        if (current == null) {
+            return new BSTNode(element);
+        }
+        if (element < current.getElement()) {
+            current.setLeft(addRecursive(current.getLeft(), element));
+        }
+        else if (element > current.getElement()) {
+            current.setRight(addRecursive(current.getRight(), element));
         }
         else
         {
-            BSTNode current = root;
-            while(current.getRight() != null) {
-                current = current.getRight();
-            }
-            current.setRight(node);
+            return current;
         }
+        return current;
     }
 }

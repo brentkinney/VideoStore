@@ -1,5 +1,6 @@
 public class BSTNode implements Comparable<BSTNode>  {
-    public Object element;
+    private int id;
+	public Object element;
     public BSTNode left;
     public BSTNode right;
 
@@ -7,11 +8,20 @@ public class BSTNode implements Comparable<BSTNode>  {
      * default contstructor
      * @param obj the element of node
      */
-    public BSTNode (Object obj) {
-        element = obj;
+    public BSTNode (int num, Object obj) {
+        id = num;
+		element = obj;
         left = null;
         right = null;
     }
+
+	/**
+	 * get id of node
+	 * @return node id
+	 */
+	public int getId() {
+		return id;
+	}
 
 	/**
 	 * get element of tree node
@@ -35,6 +45,14 @@ public class BSTNode implements Comparable<BSTNode>  {
 	 */
 	public BSTNode getRight() {
 		return right;
+	}
+
+	/**
+	 * set id of node
+	 * @param num id
+	 */
+	public void setId(int num) {
+		id = num;
 	}
 
 	/**

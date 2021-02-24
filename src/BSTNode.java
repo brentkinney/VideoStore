@@ -1,4 +1,4 @@
-public class BSTNode {
+public class BSTNode implements Comparable<Object>  {
     public Object element;
     public BSTNode left;
     public BSTNode right;
@@ -61,5 +61,13 @@ public class BSTNode {
 		right = r;
 	}
 
-   
+   /**
+	 * Implement the compareTo method of the Comparable interface.
+	 * @param	target The target MyBinaryTreeNode to be compared to.
+	 * @return	-1 if this < target, 1 if this > target, 0 otherwise.
+	 */
+	public int compareTo(Object target)
+	{
+		return ((Comparable)this.getElement()).compareTo(target);
+	}
 }

@@ -17,6 +17,13 @@ public class Misc {
 
     }
 
+    /**
+     * method to move all discs from one rod to another without placing larger discs on smaller ones
+     * @param n number of discs to use
+     * @param from_rod name of first rod, A
+     * @param to_rod name of second rod, B
+     * @param aux_rod name of third rod, C
+     */
     static void towerOfHanoi(int n, char from_rod, char to_rod, char aux_rod) {
         if (n == 1) {
             System.out.println("Move disk 1 from rod " + from_rod + " to rod " + to_rod);
@@ -39,6 +46,12 @@ public class Misc {
         return false;
     }
 
+    /**
+     * determine if ordered int array contains two elements that sum to given int
+     * @param A ordered int array to check
+     * @param sum value of int to check if elements sum too
+     * @return true if two elements sum to given int, false if not
+     */
     public static boolean containsSumRecursive(int[] A, int sum) {
         return containsSumRecursive(A, sum, 0, A.length - 1);
     }

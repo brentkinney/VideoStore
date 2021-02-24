@@ -189,4 +189,22 @@ public class SLL {
             current.setNext(current.getNext().getNext());
         }
     }
+
+    public SLLNode middle() {
+        //check if list is null and return if true
+        if (head == null)
+        {
+            return null;
+        }
+        //create two temp nodes at head, fast and slow
+        SLLNode slow = head;
+        SLLNode fast = head;        
+        //go through list with two temp ref, as fast moves forward at twice the speed of slow,
+        //when fast reaches the end of the list, slow will be in the middle        
+        while (fast != null && fast.getNext() != null) {
+            slow = slow.getNext();
+            fast = fast.getNext().getNext();            
+        }        
+        return slow;        
+    }
 }

@@ -268,5 +268,11 @@ public class DLL {
             current.setNext(current.getNext().getNext());
             current.setPrev(current.getPrev());
         }
-    }    
+    }
+    
+    public DLL concatenate(DLL L, DLL M) {
+        L.tail.setNext(M.head);
+        M.head.setPrev(L.tail);
+        return L;
+    }
 }

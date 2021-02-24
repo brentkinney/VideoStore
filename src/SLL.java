@@ -190,21 +190,27 @@ public class SLL {
         }
     }
 
-    public SLLNode middle() {
+    /**
+     * get middle node (n+1/2) of odd lists and n/2 of even lists where n
+     * is the number of nodes in list
+     * @return element of the middle node
+     */
+    public Object middle() {
         //check if list is null and return if true
         if (head == null)
         {
             return null;
         }
-        //create two temp nodes at head, fast and slow
+        //create two temp nodes at head, fast and slow, normally set both to head node but in order to return proper node per instruction,
+        //make fast node point to head.getnext() to return n+1/2 for odd lists
         SLLNode slow = head;
-        SLLNode fast = head;        
+        SLLNode fast = head.getNext();        
         //go through list with two temp ref, as fast moves forward at twice the speed of slow,
         //when fast reaches the end of the list, slow will be in the middle        
         while (fast != null && fast.getNext() != null) {
             slow = slow.getNext();
             fast = fast.getNext().getNext();            
         }        
-        return slow;        
+        return slow.getElement();        
     }
 }

@@ -1,7 +1,15 @@
 public class Misc {
     public static void main(String[] args)  {
 
-    static void towerOfHanoi(int n, char from_rod, char to_rod, char aux_rod) {
+        int n = 4; // Number of disks 
+        towerOfHanoi(n, 'A', 'C', 'B'); // A, B and C are names of rods
+
+    }   
+    
+    
+    
+    
+        static void towerOfHanoi(int n, char from_rod, char to_rod, char aux_rod) {
         if (n == 1) {
             System.out.println("Move disk 1 from rod " + from_rod + " to rod " + to_rod);
             return;
@@ -10,4 +18,5 @@ public class Misc {
         System.out.println("Move disk " + n + " from rod " + from_rod + " to rod " + to_rod);
         towerOfHanoi(n - 1, aux_rod, to_rod, from_rod);
     }
+
 }

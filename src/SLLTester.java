@@ -16,10 +16,12 @@ public class SLLTester {
 		s.add(b);
 		s.add(c);
 		s.print();
+		System.out.println(s.middle());
 
 		// Remove, and then print all elements in s // output 1, 2
 		s.remove();
 		s.print();
+		System.out.println(s.middle());
 
 		// Remove, and then print all elements in s // output 1
 		s.remove();
@@ -53,6 +55,7 @@ public class SLLTester {
 		//SLLNode d = new SLLNode(4, null);
 		s.addAtIndex(4, 1);
 		s.print();
+		System.out.println(s.middle());
 
 		// Add a method in SLL to remove the node at index i
 		s.removeAtIndex(1);
@@ -68,7 +71,7 @@ public class SLLTester {
 
 		// Get the middle node
 		//Node middle = s.middle();
-		//System.out.println(middle.GetElement());
+		System.out.println(s.middle());
 
 	}
 }

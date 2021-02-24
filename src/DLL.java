@@ -270,9 +270,18 @@ public class DLL {
         }
     }
     
+    /**
+     * concatenate two doubly linked lists together
+     * @param L first list
+     * @param M second list
+     * @return first list now concatenated with second list
+     */
     public DLL concatenate(DLL L, DLL M) {
+        //set tail.next of first list to head of second list
         L.tail.setNext(M.head);
+        //set head.prev of second list to tail of first list
         M.head.setPrev(L.tail);
+        //now the first list, L, contains all elements of both lists so discard list M and return L
         return L;
     }
 }

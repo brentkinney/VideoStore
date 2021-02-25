@@ -77,15 +77,5 @@ public class BSTNode implements Comparable<BSTNode>  {
 	 */
 	public void setRight(BSTNode r) {
 		right = r;
-	}
-
-  /**
-	 * Implement the compareTo method of the Comparable interface.
-	 * @param	target The target MyBinaryTreeNode to be compared to.
-	 * @return	-1 if this < target, 1 if this > target, 0 otherwise.
-	 */
-	public int compareTo(BSTNode target)
-	{
-		return ((Comparable)this.element).compareTo(target.element);
-	}
+	}  
 }

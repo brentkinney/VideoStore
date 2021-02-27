@@ -1,4 +1,4 @@
-public class BSTNode implements Comparable<BSTNode>  {
+public class BSTNode  {
     private int id;
 	public Object element;
     public BSTNode left;

@@ -1,49 +1,40 @@
 public class Video {
-    private int Id;
-	private String Title;
-	private boolean InStore;
-	private int CheckedOutToCustomerId;
-
-	public Video(String title) {
-		Id = 0;
-		Title = title;
-		InStore = true;
-		CheckedOutToCustomerId = 0;
-	}
-
-	public String getTitle() {
-		return Title;
-	}
-
-	public int getId() {
-		return Id;
-	}
-
-	public void setId(int id) {
-		Id = id;
-	}
-
-	public boolean getInStore() {
-		return InStore;
-	}
-
-	public void setInStore(boolean inStore) {
-		InStore = inStore;
-	}
-
-	public int getCheckedOutCustomerId() {
-		return CheckedOutToCustomerId;
-	}
-
-	public void setCheckedOutCustomerId(int customerId) {
-		CheckedOutToCustomerId = customerId;
-	}
-
-	public String toString() {
-		return "[" + Id + "]: " + Title + " [STATUS: " + (InStore ? "In Store" : "Not In Store") + "]";
-	}
-
-	public String toBasicString() {
-		return "[" + Id + "]: " + Title;
-	}
+	private final int id;
+    private final String title;
+    
+    /*
+     * Builds the Video object.
+     * Supplying the ID and Title of a video will build this object.
+     * @param id The desired ID for the movie.
+     * @param title The title of the movie.
+     */
+    public Video(int id, String title) {
+        this.id = id;
+        this.title = title;
+    }
+    
+    /*
+     * Returns the ID of the movie in the object.
+     * @return ID of movie.
+     */
+    public int getId() {
+        return id;
+    }
+    
+    /*
+     * Returns the title of the movie.
+     * @return title of movie.
+     */
+    public String getTitle() {
+        return title;
+    }
+    
+    /*
+     * Returns a string of all information for the movie.
+     * @return all movie information.
+     */
+    @Override
+    public String toString() {
+        return "ID: " + id + ", Title: " + title;
+    }
 }

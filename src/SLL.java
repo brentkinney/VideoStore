@@ -90,6 +90,32 @@ public class SLL {
         }
     }
 
+    public void remove(Object obj) {
+        if(head == null)
+        {
+            return;
+        }
+        if(head.getElement() == obj)
+        {
+            if (head.getNext() == null)
+            {
+                head = null;
+            }
+            else
+            {
+                head = head.getNext();
+            }            
+        }
+        SLLNode temp = head;
+        while (temp.getNext() != null){
+            if (temp.getNext().getElement() == obj)
+            {
+                temp.setNext(temp.getNext().getNext());
+            }
+            temp = temp.getNext();
+        }
+    }
+
     /**
      * reverse nodes contained in list
      */

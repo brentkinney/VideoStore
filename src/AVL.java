@@ -60,11 +60,11 @@ public class AVL {
     
     
     /**
-     * delete node from tree and rebalance if needed
+     * remove node from tree and rebalance if needed
      * @param id the node to remove
      * @return element of removed item
      */
-    public Object delete(int id) {
+    public Object remove(int id) {
         AVLNode parent = root;
         AVLNode current = root;
         boolean isLeftChild = false;

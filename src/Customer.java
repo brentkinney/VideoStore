@@ -132,34 +132,7 @@ public class Customer {
                         break;
                     }
                     temp = temp.getNext();
-                }
-                
-                /*
-                SLLNode previousSLL = VideoSLL.getHead();
-                SLLNode currentSLL = VideoSLL.getHead();
-                
-                element = (Video) currentSLL.getElement();
-                i = 0;
-                
-                while(currentSLL.getNext() != null) {
-                    if(i != 0) {
-                        previousSLL = currentSLL;
-                        currentSLL = currentSLL.getNext();
-                        element = (Video) currentSLL.getElement();
-                    }
-                    
-                    if(element.getId() == id) {
-                        VideoSLL.removeNode(previousSLL, currentSLL);
-                        break;
-                    }
-                    
-                    i++;
-                }
-                
-                if(currentSLL.getNext() == null && element.getId() == id) {
-                    VideoSLL.removeNode(previousSLL, currentSLL);
-                }
-                */
+                }               
                 break;
             case "DLL":                
                 if(VideoDLL.getHead() == null) {
@@ -175,42 +148,12 @@ public class Customer {
                         break;
                     }
                     temp2 = temp2.getNext();
-                }
-
-                /*
-                if(VideoDLL.getHead() == null) {
-                    return null;
-                }
-                
-                DLLNode currentDLL = VideoDLL.getHead();
-                
-                element = (Video) currentDLL.getElement();
-                i = 0;
-                
-                while(currentDLL.getNext() != null) {
-                    if(i != 0) {
-                        currentDLL = currentDLL.getNext();
-                        element = (Video) currentDLL.getElement();
-                    }
-                    
-                    if(element.getId() == id) {
-                        VideoDLL.remove(currentDLL);
-                        return element;
-                    }
-                    
-                    i++;
-                }
-                
-                if(currentDLL.getNext() == null && element.getId() == id) {
-                    VideoDLL.remove(currentDLL);
-                }*/
+                }                
                 break;
             case "BST":
-                return (Video) VideoBST.remove(id);
-                //break;
+                return (Video) VideoBST.remove(id);                
             case "AVL":
-                return (Video) VideoAVL.remove(id);
-                //break
+                return (Video) VideoAVL.remove(id);                
             default:
                 break;
         }
@@ -283,11 +226,9 @@ public class Customer {
                 
                 break;
             case "BST":
-                return VideoBST.find(id);
-                //break
+                return VideoBST.find(id);                
             case "AVL":
-                return VideoAVL.find(id);
-                //break;
+                return VideoAVL.find(id);                
             default:
                 break;
         }

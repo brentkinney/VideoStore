@@ -1,64 +1,66 @@
+/**
+ * This is the main driver of the video store program, it takes in 1 of 4 data structure types and creates all videos/customers/rentals in the associated
+ * data structure.
+ * I chose not to implement this program using an interface as I had started on my data strucutre classes first and wrote each somewhat differently
+ * from the others.  By the time I got to the VideoStore portion, I realized my error.  What I should have done was set the overall VideoStore outline first
+ * and then created my data strucutre classes all in the same exact way so the VideoStore stuff would function the same way for each datatype.
+ * That way I wouldnt have had to hack together my VideoStore methods with the data structure methods to achieve the required result... But, even though
+ * this implementation could have been cleaner, it gets the job done and will have to be a learning experience for me.
+ */
+
 import java.io.InputStreamReader;
 import java.util.Scanner;
 import java.util.Stack;
 public class VideoStore {
-    private static String datatype = "";//This is the datatype the user will be choosing for how to store the videos/customers/etc. in the video store
-    private static int videoCount = 1;//This is the number of videos in the video store initialized to 1
-    private static int customersCount = 1;//This is the number of customers the video store has initialized to 1
-    private static AVL videosAVL;//This is the AVL Tree for the videos in the store
-    private static AVL customersAVL;//This is the AVL Tree for the videos in the store
-    private static BST videosBST;//This is the Binary Search Tree for the videos in the store
-    private static BST customersBST;//This is the Binary Search Tree for the videos in the store
-    private static DLL videosDLL;//This is the Doubly Linked List for the videos in the store
-    private static DLL customersDLL;//This is the Doubly Linked List for the videos in the store
-    private static SLL videosSLL;//This is the Singly Linked List for the videos in the store
-    private static SLL customersSLL;//This is the Singly Linked List for the Customers in the store
+    private static String datatype = "";
+    private static int videoCount = 1;
+    private static int customersCount = 1;
+    private static AVL videosAVL;
+    private static AVL customersAVL;
+    private static BST videosBST;
+    private static BST customersBST;
+    private static DLL videosDLL;
+    private static DLL customersDLL;
+    private static SLL videosSLL;
+    private static SLL customersSLL;
     private static Stack<Integer> transactionStack;
     
 	public static void main(String[] args) {
-		//Boolean continueProgram = false;//The flag to continue the program's execution
 		
-		if(args.length > 0) {//This ensures that we are accepting a valid argument so that the program may function correctly
+		//check args given
+		if(args.length > 0) {
             datatype = args[0];
         }
+        else {
+            System.out.println("You must choose from any of the following data structures: SLL, DLL, BST, and AVL.");
+            quit();
+        }        
 		
 		
 		switch(datatype) {
         case "SLL":            
             videosSLL = new SLL();
-            customersSLL = new SLL();
-            //continueProgram = true;
+            customersSLL = new SLL();            
             break;
         case "DLL":            
             videosDLL = new DLL();
-            customersDLL = new DLL();
-            //continueProgram = true;
+            customersDLL = new DLL();           
             break;
         case "BST":            
             videosBST = new BST();
-            customersBST = new BST();
-            //continueProgram = true;
+            customersBST = new BST();            
             break;
         case "AVL":            
             videosAVL = new AVL();
-            customersAVL = new AVL();
-            
-            //continueProgram = true;
-            break;
-        default:
-            System.out.println("You can choose from any of the following data structures: SLL, DLL, BST, and AVL.");
-            //continueProgram = true;
-            break;
+            customersAVL = new AVL();            
+            break;        
 		}
 		
-		//if datatype was not chosen then we stop
-       // if(continueProgram == false) {
-         //   quit();
-       // }
+		
         
-        int videosInStore = 0;//Initialize the amount of videos the store has with 0 as none have been added as of yet
-        int customersOfStore = 0;//Initialize the amount of customers the store has to 0 as none have been added yet
-        int transactionsCompleted = 0;//Initialize the amount of transactions which have been completed to 0 as none have been started yet
+        int videosInStore = 0;
+        int customersOfStore = 0;
+        int transactionsCompleted = 0;
         
         //check if there are 3 more parameters being passed to the program
         //these parameters supply auto creations in the program
@@ -332,7 +334,12 @@ public class VideoStore {
         System.out.println("===========================");
     }
 	
-	private static void inputVideo(int id, String name) {
+	/**
+     * insert given video
+     * @param id is the id the video will have
+     * @param name is the video title
+     */
+    private static void inputVideo(int id, String name) {
         switch(datatype) {
             case "SLL":
             	videosSLL.add(new SLLNode(new Video(id, name), null));
@@ -351,10 +358,13 @@ public class VideoStore {
         }
     }
 	
-	//remove the video from the store
+	/**
+     * remove video with given id
+     * @param id of video to remove
+     * @return removed video
+     */
 	private static Video removeVideo(int id) {
-        Video element = null;
-        int i;
+        Video vid = null;        
         
         switch(datatype) {
             case "SLL":
@@ -362,76 +372,52 @@ public class VideoStore {
                     return null;
                 }
                 
-                SLLNode previousSLL = videosSLL.getHead();
-                SLLNode currentSLL = videosSLL.getHead();
-                
-                element = (Video) currentSLL.getElement();
-                i = 0;
-                
-                while(currentSLL.getNext() != null) {
-                    if(i != 0) {
-                        previousSLL = currentSLL;
-                        currentSLL = currentSLL.getNext();
-                        element = (Video) currentSLL.getElement();
-                    }
-                    
-                    if(element.getId() == id) {
-                    	videosSLL.removeNode(previousSLL, currentSLL);
+                SLLNode temp = videosSLL.getHead();
+                while(temp.getNext() != null)
+                {
+                    vid = (Video) temp.getElement();
+                    if (vid.getId() == id)
+                    {
+                        videosSLL.remove(vid);
                         break;
                     }
-                    
-                    i++;
-                }
-                
-                if(currentSLL.getNext() == null && element.getId() == id) {
-                	videosSLL.removeNode(previousSLL, currentSLL);
-                }
-                
+                    temp = temp.getNext();
+                }                
                 break;
             case "DLL":
                 if(videosDLL.getHead() == null) {
                     return null;
                 }
-                
-                DLLNode currentDLL = videosDLL.getHead();
-                
-                element = (Video) currentDLL.getElement();
-                i = 0;
-                
-                while(currentDLL.getNext() != null) {
-                    if(i != 0) {
-                        currentDLL = currentDLL.getNext();
-                        element = (Video) currentDLL.getElement();
+                DLLNode temp2 = videosDLL.getHead();
+                while(temp2.getNext() != null)
+                {
+                    vid = (Video) temp2.getElement();
+                    if (vid.getId() == id)
+                    {
+                        videosDLL.remove(temp2);
+                        break;
                     }
-                    
-                    if(element.getId() == id) {
-                    	videosDLL.remove(currentDLL);
-                        return element;
-                    }
-                    
-                    i++;
-                }
-                
-                if(currentDLL.getNext() == null && element.getId() == id) {
-                	videosDLL.remove(currentDLL);
-                }
+                    temp2 = temp2.getNext();
+                }                
                 break;
             case "BST":
-                return (Video) videosBST.remove(id);
-                //break;
+                return (Video) videosBST.remove(id);                
             case "AVL":
-                return (Video) videosAVL.remove(id);
-                //break;
+                return (Video) videosAVL.remove(id);                
             default:
                 break;
         }
         
-        return element;
+        return vid;
     }
 	
-	//check if the video is in the store
+	/**
+     * check if video is in store
+     * @param id of video to check
+     * @return true if found or false if not found
+     */
 	private static boolean checkInStore(int id) {
-        Video element;
+        Video vid;
         int i;
         
         switch(datatype) {
@@ -441,23 +427,23 @@ public class VideoStore {
                 }
                 
                 SLLNode currentSLL = videosSLL.getHead();
-                element = (Video) currentSLL.getElement();
+                vid = (Video) currentSLL.getElement();
                 i = 0;
                 
                 while(currentSLL.getNext() != null) {
                     if(i != 0) {
                         currentSLL = currentSLL.getNext();
-                        element = (Video) currentSLL.getElement();
+                        vid = (Video) currentSLL.getElement();
                     }
                     
-                    if(element.getId() == id) {
+                    if(vid.getId() == id) {
                         return true;
                     }
                     
                     i++;
                 }
                 
-                if(currentSLL.getNext() == null && element.getId() == id) {
+                if(currentSLL.getNext() == null && vid.getId() == id) {
                     return true;
                 }
                 
@@ -468,33 +454,31 @@ public class VideoStore {
                 }
                 
                 DLLNode currentDLL = videosDLL.getHead();
-                element = (Video) currentDLL.getElement();
+                vid = (Video) currentDLL.getElement();
                 i = 0;
                 
                 while(currentDLL.getNext() != null) {
                     if(i != 0) {
                         currentDLL = currentDLL.getNext();
-                        element = (Video) currentDLL.getElement();
+                        vid = (Video) currentDLL.getElement();
                     }
                     
-                    if(element.getId() == id) {
+                    if(vid.getId() == id) {
                         return true;
                     }
                     
                     i++;
                 }
                 
-                if(currentDLL.getNext() == null && element.getId() == id) {
+                if(currentDLL.getNext() == null && vid.getId() == id) {
                     return true;
                 }
                 
                 break;
             case "BST":
-                return videosBST.find(id);
-                //break;
+                return videosBST.find(id);                
             case "AVL":
-                return videosAVL.find(id);
-                //break;
+                return videosAVL.find(id);                
             default:
                 break;
         }
@@ -502,7 +486,11 @@ public class VideoStore {
         return false;
     }
 	
-	//Add the given customer to the respective list
+	/**
+     * add customer to store
+     * @param id to set as customer id
+     * @param name of customer
+     */
 	private static void insertCustomer(int id, String name) {
         switch(datatype) {
             case "SLL":
@@ -522,10 +510,12 @@ public class VideoStore {
         }
     }
 	
-	//remove the customer of the passed in ID number
+	/**
+     * remove customer with given id
+     * @param id of customer to remove
+     */
 	private static void deleteCustomer(int id) {
-        Customer element;
-        int i;
+        Customer cust;        
         
         switch(datatype) {
             case "SLL":
@@ -533,29 +523,16 @@ public class VideoStore {
                     return;
                 }
                 
-                SLLNode previousSLL = customersSLL.getHead();
-                SLLNode currentSLL = customersSLL.getHead();
-                
-                element = (Customer) currentSLL.getElement();
-                i = 0;
-                
-                while(currentSLL.getNext() != null) {
-                    if(i != 0) {
-                        previousSLL = currentSLL;
-                        currentSLL = currentSLL.getNext();
-                        element = (Customer) currentSLL.getElement();
-                    }
-                    
-                    if(element.getId() == id) {
-                    	customersSLL.removeNode(previousSLL, currentSLL);
+                SLLNode temp = customersSLL.getHead();
+                while(temp.getNext() != null)
+                {
+                    cust = (Customer) temp.getElement();
+                    if (cust.getId() == id)
+                    {
+                        customersSLL.remove(cust);
                         break;
                     }
-                    
-                    i++;
-                }
-                
-                if(currentSLL.getNext() == null && element.getId() == id) {
-                	customersSLL.removeNode(previousSLL, currentSLL);
+                    temp = temp.getNext();
                 }
                 
                 break;
@@ -564,26 +541,16 @@ public class VideoStore {
                     return;
                 }
                 
-                DLLNode currentDLL = customersDLL.getHead();
-                
-                element = (Customer) currentDLL.getElement();
-                i = 0;
-                
-                while(currentDLL.getNext() != null) {
-                    if(i != 0) {
-                        currentDLL = currentDLL.getNext();
-                        element = (Customer) currentDLL.getElement();
+                DLLNode temp2 = customersDLL.getHead();
+                while(temp2.getNext() != null)
+                {
+                    cust = (Customer) temp2.getElement();
+                    if (cust.getId() == id)
+                    {
+                        customersDLL.remove(temp2);
+                        break;
                     }
-                    
-                    if(element.getId() == id) {
-                    	customersDLL.remove(currentDLL);
-                    }
-                    
-                    i++;
-                }
-                
-                if(currentDLL.getNext() == null && element.getId() == id) {
-                	customersDLL.remove(currentDLL);
+                    temp2 = temp2.getNext();
                 }
                 
                 break;
@@ -598,12 +565,20 @@ public class VideoStore {
         }
     }
 	
-	//if the customer ID that is provided is valid return true
+	/**
+     * check if customer has exists
+     * @param id of customer to check
+     * return true if found, flase if not
+     */
 	private static boolean validCustomer(int id) {
         return getCustomer(id) != null;
     }
 	
-	//get the customer of the passed in ID
+	/**
+     * get customer with given id
+     * @param id of customer to check
+     * @return customer with given id
+     */
 	private static Customer getCustomer(int id) {
         Customer element;
         int i;
@@ -676,7 +651,11 @@ public class VideoStore {
         return null;
     }
 	
-	//check the video out of the store
+	/**
+     * check out a video from store
+     * @param cid customer that is chekcing out video
+     * @param vid video that is being checked out
+     */
 	private static void videoCheckOut(int cid, int vid) {
         //System.out.println("videoCheckOut");
         if(!checkInStore(vid) || !validCustomer(cid)) {
@@ -687,7 +666,10 @@ public class VideoStore {
         getCustomer(cid).inputVideo(videoElement);
     }
 	
-	//Check the video into the store
+	/**
+     * return a video to the store
+     * @param vid the video being returned
+     */
 	private static void videoCheckIn(int vid) {
         if(checkInStore(vid)) {
             return;
@@ -702,7 +684,9 @@ public class VideoStore {
         }
     }
 	
-	//Print the videos that are in the store
+	/**
+     * print all videos in store
+     */
 	private static void printCheckedIn() {
         switch(datatype) {
             case "SLL":
@@ -722,14 +706,19 @@ public class VideoStore {
         }
     }
 	
-	//Print the videos that have been checked out
+	/**
+     * print all checked out videos
+     */
 	private static void printCheckedOut() {
         for(int i = 1; i <= customersCount; i++) {
             printAtElement(i);
         }
     }
 	
-	//if the customer ID is valid then we can print the videos he/she has checked out
+	/**
+     * print all videos checkout by a customer
+     * @param id of customer to print videos
+     */
 	private static void printAtElement(int id) {
         if(!validCustomer(id)) {
             return;
@@ -740,7 +729,7 @@ public class VideoStore {
 	
 	
 	/*
-	 * This is the method to quit using the program
+	 * Quit program
 	 */
 	private static void quit() {
         System.exit(0);

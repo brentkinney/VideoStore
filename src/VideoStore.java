@@ -62,8 +62,7 @@ public class VideoStore {
         int customersOfStore = 0;
         int transactionsCompleted = 0;
         
-        //check if there are 3 more parameters being passed to the program
-        //these parameters supply auto creations in the program
+        //check if there are 3 more parameters being passed to the program        
         if(args.length == 4) {
             videosInStore = Integer.parseInt(args[1]);
             customersOfStore = Integer.parseInt(args[2]);
@@ -78,16 +77,13 @@ public class VideoStore {
         System.out.println("Videos: " + videosInStore + ", Customers: " + customersOfStore + ", Transactions: " + transactionsCompleted);
         
         
-        if(videosInStore == 0 && customersOfStore == 0 && transactionsCompleted == 0) {
+        if(videosInStore == 0 && customersOfStore == 0 && transactionsCompleted == 0) {        	
         	
-        	//Start a scanner for the user to be able to type into the console so that he/she can use the menu properly
             Scanner input = new Scanner(new InputStreamReader(System.in));
-            String userSelection;//this will be a variable to hold what the user selects from the input of the menu
+            String userSelection;
             
-            while(true) {
-            	//call the menu method so that we can display the menu to the user so that they know what to pick and how to pick it
-                menu();
-                //get a response from the user by reading the next line from the console and set it to the suerSelection variable 
+            while(true) {            	
+                menu();                 
                 userSelection = input.nextLine();
                 
                 switch(userSelection) {
@@ -96,7 +92,7 @@ public class VideoStore {
                         System.out.println("Please enter name of the video:");
                         
                         System.out.print("Name: ");
-                        String videoTitle = input.nextLine().trim();//get rid of any white space at the beginning or end of the video title
+                        String videoTitle = input.nextLine().trim();
                         
                         //increment the number of videos we have and pass it to the inputVideo method so it can be added to the list
                         inputVideo(videoCount++, videoTitle);
@@ -109,9 +105,9 @@ public class VideoStore {
                         String videoID = input.nextLine().trim();
                         
                         while(!videoID.matches("^\\d+$")) {
-                            System.out.println("ID's can only be numbers.");//if the video ID entered is not a number try again
+                            System.out.println("ID's can only be numbers.");//check input
                             System.out.print("ID: ");
-                            videoID = input.nextLine().trim();//remove any whitespace around the video ID and store it in the ID variable
+                            videoID = input.nextLine().trim();
                         }
                         
                         removeVideo(Integer.parseInt(videoID));//call the remove method and pass it the video ID
@@ -121,9 +117,9 @@ public class VideoStore {
                     	//Add a customer
                         System.out.println("Enter the customer's name:");
                         System.out.print("Customer Name: ");
-                        String customerName = input.nextLine().trim();//Remove white space of customers name save the name in a variable
+                        String customerName = input.nextLine().trim();
                         
-                        insertCustomer(customersCount++, customerName);//increment the customers in the store and pass the name to insertCustomer
+                        insertCustomer(customersCount++, customerName);
                         
                         break;
                     case "4":
@@ -134,9 +130,9 @@ public class VideoStore {
                         String customerID = input.nextLine().trim();
                         
                         while(!customerID.matches("^\\d+$")) {
-                            System.out.println("ID's can only be numbers.");//Customer ID only numbers otherwise try again
+                            System.out.println("ID's can only be numbers.");//Check input
                             System.out.print("ID: ");
-                            customerID = input.nextLine().trim();//trim white space from name and pass to remove method
+                            customerID = input.nextLine().trim();
                         }
                         
                         deleteCustomer(Integer.parseInt(customerID));
@@ -201,8 +197,7 @@ public class VideoStore {
                         
                         break;
                     case "8":
-                    	//Print all the customers in the store
-                    	//For the given datatype print everything inside the store
+                    	//Print all the customers in the store                    
                         switch(datatype) {
                             case "SLL":
                             	customersSLL.print();
@@ -228,7 +223,7 @@ public class VideoStore {
                         
                         break;
                     case "10":
-                        //Print all in store videos, i.e available to rent videos
+                        //Print videos in store
                         printCheckedIn();
                         
                         break;
@@ -263,26 +258,26 @@ public class VideoStore {
                 }
             }
         } else {
-            //The previous If is for when there is nothing in the list, this is the case where there is stuff in the list
+            //if additional args are given in main, we process transactions
             for(int i = 0; i < videosInStore; i++) {
-                inputVideo(videoCount++, "Video " + (i + 1));//increment through to add the new video
+                inputVideo(videoCount++, "Video " + (i + 1));
             }
             
             for(int i = 0; i < customersOfStore; i++) {
-                insertCustomer(customersCount++, "Customer " + (i + 1));//increment through to add the customer
+                insertCustomer(customersCount++, "Customer " + (i + 1));
             }
             
             transactionStack = new Stack<>();
             for(int i = 0; i < transactionsCompleted; i++) {
-                int random = 5 + (int)(Math.random() * ((7 - 5) + 1));//add a new transaction to the transaction stack
+                int random = 5 + (int)(Math.random() * ((7 - 5) + 1));
                 transactionStack.push(random);
             }
             
             
-            final long startTime = System.currentTimeMillis();//start a timer for the timing info later in the specification
+            final long startTime = System.currentTimeMillis();
             
             for(int i = 0; i < transactionsCompleted; i++) {
-                int temp = transactionStack.pop();//temporary variable for holding the popped item for later use
+                int temp = transactionStack.pop();
                 
                 //Video is in store
                 if(temp == 5) {
@@ -305,10 +300,10 @@ public class VideoStore {
                 
             }
             
-            final long stopTime = System.currentTimeMillis();//variable for the stopping time to be compared to starting time to check
-            													//the total time of execution
-            System.out.println("Operation Took: " + ((stopTime - startTime) / 1000.0) + "seconds");//convert the time in milliseconds to
-            																		//seconds by multiplying by 1000 which will return seconds
+            final long stopTime = System.currentTimeMillis();
+            //print execution time													
+            System.out.println("Operation Took: " + ((stopTime - startTime) / 1000.0) + "seconds");
+            																		
 
         }
 

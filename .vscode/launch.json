@@ -71,7 +71,7 @@
             "request": "launch",
             "mainClass": "VideoStore",
             "projectName": "VideoStore_27d16fd1",
-            "args": "SLL 5 5 5"
+            "args": "SLL 300 20 100"
         }
     ]
 }

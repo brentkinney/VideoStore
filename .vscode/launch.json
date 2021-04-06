@@ -1,0 +1,77 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch with Arguments Prompt",
+            "request": "launch",
+            "mainClass": "VideoStore",
+            "args": "${command:SpecifyProgramArgs}"            
+        },
+
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch DLLTester",
+            "request": "launch",
+            "mainClass": "DLLTester",
+            "projectName": "VideoStore_27d16fd1"
+            
+        },        
+        {
+            "type": "java",
+            "name": "Launch SLLTester",
+            "request": "launch",
+            "mainClass": "SLLTester",
+            "projectName": "VideoStore_27d16fd1"
+        },
+        {
+            "type": "java",
+            "name": "Launch VideoStore SLL",
+            "request": "launch",
+            "mainClass": "VideoStore",
+            "projectName": "VideoStore_27d16fd1",
+            "args": "SLL"
+        },
+        {
+            "type": "java",
+            "name": "Launch VideoStore DLL",
+            "request": "launch",
+            "mainClass": "VideoStore",
+            "projectName": "VideoStore_27d16fd1",
+            "args": "DLL"
+        },
+        {
+            "type": "java",
+            "name": "Launch VideoStore BST",
+            "request": "launch",
+            "mainClass": "VideoStore",
+            "projectName": "VideoStore_27d16fd1",
+            "args": "BST"
+        },
+        {
+            "type": "java",
+            "name": "Launch VideoStore AVL",
+            "request": "launch",
+            "mainClass": "VideoStore",
+            "projectName": "VideoStore_27d16fd1",
+            "args": "AVL"
+        },
+        {
+            "type": "java",
+            "name": "Launch VideoStore 4 Args",
+            "request": "launch",
+            "mainClass": "VideoStore",
+            "projectName": "VideoStore_27d16fd1",
+            "args": "SLL 5 5 5"
+        }
+    ]
+}

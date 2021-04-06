@@ -1,7 +1,7 @@
 /**
  * This is the main driver of the video store program, it takes in 1 of 4 data structure types and creates all videos/customers/rentals in the associated
  * data structure.
- * I chose not to implement this program using an interface as I had started on my data strucutre classes first and wrote each somewhat differently
+ * I chose/was forced not to implement this program using an interface as I had started on my data strucutre classes first and wrote each somewhat differently
  * from the others.  By the time I got to the VideoStore portion, I realized my error.  What I should have done was set the overall VideoStore outline first
  * and then created my data strucutre classes all in the same exact way so the VideoStore stuff would function the same way for each datatype.
  * That way I wouldnt have had to hack together my VideoStore methods with the data structure methods to achieve the required result... But, even though

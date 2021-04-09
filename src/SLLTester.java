@@ -73,5 +73,9 @@ public class SLLTester {
 		//Node middle = s.middle();
 		System.out.println(s.middle());
 
+		s.print();
+		s.deleteNode(3);
+		s.print();
+
 	}
 }

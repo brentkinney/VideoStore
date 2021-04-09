@@ -239,4 +239,36 @@ public class SLL {
         }        
         return slow.getElement();        
     }
+
+    /**
+     * method to delete nth node from end of list
+     * @param key is the nth element from end to remove
+     */
+    public void deleteNode(int key)
+    {
+        //set temp node to head
+        SLLNode first = head;
+        //set another temp node to hea
+        SLLNode second = head;
+        for (int i = 0; i < key; i++) {  
+            // check if nodes in the linked list is <= N
+            if (second.getNext() == null) {
+  
+                // check if head is value being removed
+                if (i == key - 1)
+                    head = head.getNext();
+                return;
+            }
+            second = second.getNext();
+        }
+  
+        // Increment both nodes until second reaches end of list
+        while (second.getNext() != null) {
+            first = first.getNext();
+            second = second.getNext();
+        }
+  
+        // First node is pointing to nth element so remove it
+        first.setNext(first.getNext().getNext());
+    }
 }

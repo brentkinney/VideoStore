@@ -251,6 +251,18 @@ public class DLL {
         }  
     }
 
+    public void swapNode(int i, int j){
+        //set temp node to head
+        DLLNode current = head;
+        //loop through list until node just before index i found
+        for(int index=0;index<i;index++) {
+            current = current.getNext();
+        }
+        //current is now set to node before i
+        //now what?  loop through and find elemtn just before index j, how does that help?
+        
+    }
+
     /**
      * remove node at given index
      * @param index the position in the list to remove node

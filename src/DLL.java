@@ -264,51 +264,32 @@ public class DLL {
         if (j < i) {
             swap(j,i);
             return;
-        }
-        
-        //set temp node to head
-        DLLNode iNodePrev = null;
+        }        
+        //set temp node to head        
         DLLNode iNode = head;
-        //loop through list until node just before index i found
-        for(int z=0;z<i;z++) {
-            iNodePrev = iNode;
+        //loop through list until node at index i found
+        for(int z=0;z<i;z++) {            
             iNode = iNode.getNext();
         }
-        //set j nodes to current node of i and find j node
-        DLLNode jNodePrev = iNode;
-        DLLNode jNode = iNode.getNext();
-        for (int q = i + 1; q < j; q++) {
-            jNodePrev = jNode;
+        //repeat above for index j
+        DLLNode jNode = head;
+        //loop through list until node at index j found
+        for(int q=0;q<j;q++) {            
             jNode = jNode.getNext();
         }
-
-        // now that both i and j nodes found, relink both nodes in the list:
-
-        // - The jNode:
-        if (iNodePrev == null) {
-            head = jNode;
-        } else {
-            iNodePrev.setNext(jNode);
-            jNode.setPrev(iNodePrev);
-        }
-        DLLNode jNext = jNode.getNext();        
-        if (jNodePrev == iNode) {
-            jNode.setNext(iNode);
-            iNode.setPrev(jNode);
-        } else {
-            jNode.setNext(iNode.getNext());
-            iNode.getNext().setPrev(jNode);
-        }
-
-        // - The iNode:
-        if (jNodePrev == iNode) {
-        } else {
-            jNodePrev.setNext(iNode);
-            iNode.setPrev(jNodePrev);
-        }
-        iNode.setNext(jNext);
         
-        //jNext.setPrev(iNode);        
+        //create swapped nodes of i and j
+        DLLNode temp = jNode.getPrev();
+        jNode.setPrev(iNode.getPrev());
+        iNode.setPrev(temp);
+        jNode.getPrev().setNext(jNode);
+        iNode.getPrev().setNext(iNode);
+
+        temp = jNode.getNext();
+        jNode.setNext(iNode.getNext());
+        iNode.setNext(temp);
+        jNode.getNext().setPrev(jNode);
+        iNode.getNext().setPrev(iNode);      
     }
 
     /**

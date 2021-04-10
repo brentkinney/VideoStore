@@ -251,16 +251,64 @@ public class DLL {
         }  
     }
 
-    public void swapNode(int i, int j){
-        //set temp node to head
-        DLLNode current = head;
-        //loop through list until node just before index i found
-        for(int index=0;index<i;index++) {
-            current = current.getNext();
+    /**
+     * swap nodes in list at given indices
+     * @param i index of element one to be swapped
+     * @param j index of element two to be swapped
+     */
+    public void swap(int i, int j){
+        //check values of i and j
+        if (i == j) {
+            return;
         }
-        //current is now set to node before i
-        //now what?  loop through and find elemtn just before index j, how does that help?
+        if (j < i) {
+            swap(j,i);
+            return;
+        }
         
+        //set temp node to head
+        DLLNode iNodePrev = null;
+        DLLNode iNode = head;
+        //loop through list until node just before index i found
+        for(int z=0;z<i;z++) {
+            iNodePrev = iNode;
+            iNode = iNode.getNext();
+        }
+        //set j nodes to current node of i and find j node
+        DLLNode jNodePrev = iNode;
+        DLLNode jNode = iNode.getNext();
+        for (int q = i + 1; q < j; q++) {
+            jNodePrev = jNode;
+            jNode = jNode.getNext();
+        }
+
+        // now that both i and j nodes found, relink both nodes in the list:
+
+        // - The jNode:
+        if (iNodePrev == null) {
+            head = jNode;
+        } else {
+            iNodePrev.setNext(jNode);
+            jNode.setPrev(iNodePrev);
+        }
+        DLLNode jNext = jNode.getNext();        
+        if (jNodePrev == iNode) {
+            jNode.setNext(iNode);
+            iNode.setPrev(jNode);
+        } else {
+            jNode.setNext(iNode.getNext());
+            iNode.getNext().setPrev(jNode);
+        }
+
+        // - The iNode:
+        if (jNodePrev == iNode) {
+        } else {
+            jNodePrev.setNext(iNode);
+            iNode.setPrev(jNodePrev);
+        }
+        iNode.setNext(jNext);
+        
+        //jNext.setPrev(iNode);        
     }
 
     /**

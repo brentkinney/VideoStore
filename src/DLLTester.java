@@ -4,6 +4,8 @@ public class DLLTester {
 		DLLNode a = new DLLNode(1, null, null);
 		DLLNode b = new DLLNode(2, null, null);
 		DLLNode c = new DLLNode(3, null, null);
+		DLLNode D = new DLLNode(4, null, null);
+		DLLNode e = new DLLNode(5, null, null);
 
 		// Create DList d
 		DLL d = new DLL();
@@ -32,9 +34,11 @@ public class DLLTester {
 
 		// Call addFirst to add b to d; Call addFirst to add a to d; Call addLast to add
 		// c to d; then print all elements in d // output 1, 2, 3
+		d.setHead(D);
+		d.setHead(c);
 		d.setHead(b);
 		d.setHead(a);
-		d.setTail(c);
+		d.setTail(e);
 		d.print();
 
 		// Reverse d, and then print all elements in d // output 3, 2, 1
@@ -60,6 +64,19 @@ public class DLLTester {
 		d.removeAtIndex(1);
 		d.print();
 		
+		d.swap(1,3);
+		d.print();
+		
+		System.out.println("E Prev: " + e.getPrev());
+		System.out.println("E Next: " + e.getNext().getElement());
+		System.out.println("C Prev: " + c.getPrev().getElement());
+		System.out.println("C Next: " + c.getNext().getElement());
+		System.out.println("B Prev: " + b.getPrev().getElement());
+		System.out.println("B Next: " + b.getNext().getElement());
+		System.out.println("D Prev: " + D.getPrev().getElement());
+		System.out.println("D Next: " + D.getNext().getElement());
+		System.out.println("A Prev: " + a.getPrev().getElement());
+		System.out.println("A Next: " + a.getNext());
 		// Add a method to find the number of nodes in SLL
 		//var length = d.Length();
 		//System.out.println("DList contains " + length + " nodes.");

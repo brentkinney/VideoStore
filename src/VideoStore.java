@@ -11,6 +11,7 @@
 import java.io.InputStreamReader;
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.concurrent.ThreadLocalRandom;
 public class VideoStore {
     private static String datatype = "";
     private static int videoCount = 1;
@@ -27,12 +28,22 @@ public class VideoStore {
     
 	public static void main(String[] args) {
 		
-		//check args given
-		if(args.length > 0) {
+		int videosInStore = 0;
+        int customersOfStore = 0;
+        int transactionsCompleted = 0;
+        //check args given
+		if(args.length == 1) {
             datatype = args[0];
+            
+        }
+        else if (args.length == 4) {
+           videosInStore = Integer.parseInt(args[1]);
+           customersOfStore = Integer.parseInt(args[2]);
+           transactionsCompleted = Integer.parseInt(args[3]);
         }
         else {
             System.out.println("You must choose from any of the following data structures: SLL, DLL, BST, and AVL.");
+            System.out.println("Or, you may also provide a data structure and 3 int args for processing.");
             quit();
         }        
 		
@@ -54,20 +65,10 @@ public class VideoStore {
             videosAVL = new AVL();
             customersAVL = new AVL();            
             break;        
-		}
-		
+		}	
 		
         
-        int videosInStore = 0;
-        int customersOfStore = 0;
-        int transactionsCompleted = 0;
-        
-        //check if there are 3 more parameters being passed to the program        
-        if(args.length == 4) {
-            videosInStore = Integer.parseInt(args[1]);
-            customersOfStore = Integer.parseInt(args[2]);
-            transactionsCompleted = Integer.parseInt(args[3]);
-        }
+       
         
         /*
          * print out the length of what was submitted
@@ -274,35 +275,35 @@ public class VideoStore {
             }
             
             
-            final long startTime = System.currentTimeMillis();
+            final long startTime = System.nanoTime();
             
             for(int i = 0; i < transactionsCompleted; i++) {
                 int temp = transactionStack.pop();
                 
                 //Video is in store
                 if(temp == 5) {
-                    int videoRandom = 1 + (int)(Math.random() * ((videoCount - 1) + 1));
+                    int videoRandom = ThreadLocalRandom.current().nextInt(1, videosInStore + 1);
                     checkInStore(videoRandom);
                 }
                 
                 //Video is being checked out
                 if(temp == 6) {
-                    int customerRandom = 1 + (int)(Math.random() * ((customersCount - 1) + 1));
-                    int videoRandom = 1 + (int)(Math.random() * ((videoCount - 1) + 1));
+                    int customerRandom = ThreadLocalRandom.current().nextInt(1, customersOfStore + 1);
+                    int videoRandom = ThreadLocalRandom.current().nextInt(1, videosInStore + 1);
                     videoCheckOut(customerRandom, videoRandom);
                 }
                 
                 //Video is being checked in
                 if(temp == 7) {
-                    int videoRandom = 1 + (int)(Math.random() * ((videoCount - 1) + 1));
+                    int videoRandom = ThreadLocalRandom.current().nextInt(1, videosInStore + 1);
                     videoCheckIn(videoRandom);
                 }
                 
             }
             
-            final long stopTime = System.currentTimeMillis();
+            final long stopTime = System.nanoTime();
             //print execution time													
-            System.out.println("Operation Took: " + ((stopTime - startTime) / 1000.0) + "seconds");
+            System.out.println("Operation Took: " + ((stopTime - startTime) / 1000000.0) + " milliseconds");
             																		
 
         }
@@ -441,6 +442,7 @@ public class VideoStore {
                 if(currentSLL.getNext() == null && vid.getId() == id) {
                     return true;
                 }
+                
                 
                 break;
             case "DLL":
@@ -666,7 +668,7 @@ public class VideoStore {
      * @param vid the video being returned
      */
 	private static void videoCheckIn(int vid) {
-        if(checkInStore(vid)) {
+        if(checkInStore(vid) == false) {
             return;
         }
         

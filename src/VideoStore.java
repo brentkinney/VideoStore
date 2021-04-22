@@ -270,7 +270,7 @@ public class VideoStore {
             
             transactionStack = new Stack<>();
             for(int i = 0; i < transactionsCompleted; i++) {
-                int random = 5 + (int)(Math.random() * ((7 - 5) + 1));
+                int random = ThreadLocalRandom.current().nextInt(5, 8);
                 transactionStack.push(random);
             }
             
@@ -668,15 +668,20 @@ public class VideoStore {
      * @param vid the video being returned
      */
 	private static void videoCheckIn(int vid) {
-        if(checkInStore(vid) == false) {
+        if(checkInStore(vid) == true) {
             return;
         }
         
         for(int i = 1; i < customersCount; i++) {
-            if(getCustomer(i).inPossession(vid)) {
-                Video element = getCustomer(i).removeVideo(vid);
-                inputVideo(element.getId(), element.getTitle());
-                return;
+            try{
+                if(getCustomer(i).inPossession(vid)) {
+                    Video element = getCustomer(i).removeVideo(vid);
+                    inputVideo(element.getId(), element.getTitle());
+                    return;
+                }
+            }
+            catch (Exception e){
+                continue;
             }
         }
     }

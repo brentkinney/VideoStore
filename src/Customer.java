@@ -123,13 +123,13 @@ public class Customer {
                     return null;
                 }
                 SLLNode temp = VideoSLL.getHead();
-                while(temp.getNext() != null)
+                while(temp != null)
                 {
                     vid = (Video) temp.getElement();
                     if (vid.getId() == id)
                     {
                         VideoSLL.remove(vid);
-                        break;
+                        return vid;
                     }
                     temp = temp.getNext();
                 }               
@@ -139,13 +139,13 @@ public class Customer {
                     return null;
                 }
                 DLLNode temp2 = VideoDLL.getHead();
-                while(temp2.getNext() != null)
+                while(temp2 != null)
                 {
                     vid = (Video) temp2.getElement();
                     if (vid.getId() == id)
                     {
                         VideoDLL.remove(temp2);
-                        break;
+                        return vid;
                     }
                     temp2 = temp2.getNext();
                 }                

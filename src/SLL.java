@@ -106,6 +106,7 @@ public class SLL {
                 head = head.getNext();
             }            
         }
+        else{
         SLLNode temp = head;
         while (temp.getNext() != null){
             if (temp.getNext().getElement() == obj)
@@ -114,6 +115,7 @@ public class SLL {
             }
             temp = temp.getNext();
         }
+    }
     }
 
     /**
